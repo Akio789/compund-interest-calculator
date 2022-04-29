@@ -1,8 +1,9 @@
+import React from 'react';
+import CompoundInterestCalculator from './pages/compund-interest-calculator/CompoundInterestCalculator';
+
 function App() {
   return (
-    <div>
-      Hello world!
-    </div>
+    <CompoundInterestCalculator />
   );
 }
 
