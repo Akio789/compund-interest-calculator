@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
-import { Alert, Button, InputAdornment, TextField } from '@mui/material';
+import { Alert, Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PercentIcon from '@mui/icons-material/Percent';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import styles from './CalculatorInputForm.module.css';
 import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
 import _ from 'lodash'
+import { yearlyInterestFrequency } from '../constants';
 
 const CalculatorInputForm = () => {
   const { setDataFromCalculatorInputForm } = useContext(CompoundInterestCalculatorContext);
@@ -13,6 +14,10 @@ const CalculatorInputForm = () => {
   const [initialDepositFormInput, setInitialDepositFormInput] = useState(0);
   const [yearlyInterestRateFormInput, setYearlyInterestRateFormInput] = useState(0);
   const [yearsToInvestFormInput, setYearsToInvestFormInput] = useState(0);
+  const [
+    yearlyInterestFrequencyFormInput,
+    setYearlyInterestFrequencyFormInput
+  ] = useState(yearlyInterestFrequency.Yearly);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onInitialDepositFormInputChange = ({ target: { value } }) => {
@@ -41,8 +46,19 @@ const CalculatorInputForm = () => {
     setDataFromCalculatorInputForm(
       initialDepositFormInput,
       yearlyInterestRateFormInput,
-      yearsToInvestFormInput
+      yearsToInvestFormInput,
+      yearlyInterestFrequencyFormInput
     );
+  };
+
+  const yearlyInterestFrequencyMenuItems = (
+    Object.entries(yearlyInterestFrequency).map(([key, val]) => {
+      return <MenuItem value={val} key={key}>{key}</MenuItem>
+    })
+  );
+
+  const onSelectYearlyInterestFrequency = ({ target: { value } }) => {
+    setYearlyInterestFrequencyFormInput(value);
   };
 
   return (
@@ -59,6 +75,7 @@ const CalculatorInputForm = () => {
           </Alert>)
       }
       <TextField
+        variant="standard"
         label="Initial Deposit"
         InputProps={{
           startAdornment: (
@@ -71,6 +88,7 @@ const CalculatorInputForm = () => {
         onChange={onInitialDepositFormInputChange}
       />
       <TextField
+        variant="standard"
         label="Yearly Interest Rate"
         InputProps={{
           startAdornment: (
@@ -83,6 +101,7 @@ const CalculatorInputForm = () => {
         onChange={onYearlyInterestRateFormInputChange}
       />
       <TextField
+        variant="standard"
         label="Yearly To Invest"
         InputProps={{
           startAdornment: (
@@ -94,6 +113,17 @@ const CalculatorInputForm = () => {
         value={yearsToInvestFormInput}
         onChange={onYearsToInvestFormInputChange}
       />
+      <FormControl variant="standard">
+        <InputLabel>
+          Yearly Interest Frequency
+        </InputLabel>
+        <Select
+          value={yearlyInterestFrequencyFormInput}
+          onChange={onSelectYearlyInterestFrequency}
+        >
+          {yearlyInterestFrequencyMenuItems}
+        </Select>
+      </FormControl>
       <Button
         variant="contained"
         onClick={onButtonClicked}
