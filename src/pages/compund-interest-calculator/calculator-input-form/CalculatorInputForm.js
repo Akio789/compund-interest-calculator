@@ -1,41 +1,48 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Alert, Button, InputAdornment, TextField } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PercentIcon from '@mui/icons-material/Percent';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import styles from './CalculatorInputForm.module.css';
+import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
 import _ from 'lodash'
 
 const CalculatorInputForm = () => {
-  const [initialDeposit, setInitialDeposit] = useState(0);
-  const [yearlyInterestRate, setYearlyInterestRate] = useState(0);
-  const [yearsToInvest, setYearsToInvest] = useState(0);
+  const { setDataFromCalculatorInputForm } = useContext(CompoundInterestCalculatorContext);
+
+  const [initialDepositFormInput, setInitialDepositFormInput] = useState(0);
+  const [yearlyInterestRateFormInput, setYearlyInterestRateFormInput] = useState(0);
+  const [yearsToInvestFormInput, setYearsToInvestFormInput] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const onInitialDepositChange = ({ target: { value } }) => {
+  const onInitialDepositFormInputChange = ({ target: { value } }) => {
     if (_.isNaN(Number(value))) {
       return;
     }
-    setInitialDeposit(value);
+    setInitialDepositFormInput(value);
   };
-  const onYearlyInterestRateChange = ({ target: { value } }) => {
+  const onYearlyInterestRateFormInputChange = ({ target: { value } }) => {
     if (_.isNaN(Number(value))) {
       return;
     }
-    setYearlyInterestRate(value);
+    setYearlyInterestRateFormInput(value);
   };
-  const onYearsToInvestChange = ({ target: { value } }) => {
+  const onYearsToInvestFormInputChange = ({ target: { value } }) => {
     if (!_.isInteger(Number(value))) {
       return;
     }
-    setYearsToInvest(value);
+    setYearsToInvestFormInput(value);
   };
   const onButtonClicked = () => {
-    if (initialDeposit === '' || yearlyInterestRate === '' || yearsToInvest === '') {
+    if (initialDepositFormInput === '' || yearlyInterestRateFormInput === '' || yearsToInvestFormInput === '') {
       setErrorMessage('Some fields are missing');
       return;
     }
-    console.log('calculating');
+    setDataFromCalculatorInputForm(
+      initialDepositFormInput,
+      yearlyInterestRateFormInput,
+      yearsToInvestFormInput
+    );
   };
 
   return (
@@ -60,8 +67,8 @@ const CalculatorInputForm = () => {
             </InputAdornment>
           )
         }}
-        value={initialDeposit}
-        onChange={onInitialDepositChange}
+        value={initialDepositFormInput}
+        onChange={onInitialDepositFormInputChange}
       />
       <TextField
         label="Yearly Interest Rate"
@@ -72,8 +79,8 @@ const CalculatorInputForm = () => {
             </InputAdornment>
           )
         }}
-        value={yearlyInterestRate}
-        onChange={onYearlyInterestRateChange}
+        value={yearlyInterestRateFormInput}
+        onChange={onYearlyInterestRateFormInputChange}
       />
       <TextField
         label="Yearly To Invest"
@@ -84,8 +91,8 @@ const CalculatorInputForm = () => {
             </InputAdornment>
           )
         }}
-        value={yearsToInvest}
-        onChange={onYearsToInvestChange}
+        value={yearsToInvestFormInput}
+        onChange={onYearsToInvestFormInputChange}
       />
       <Button
         variant="contained"
