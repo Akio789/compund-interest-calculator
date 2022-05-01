@@ -7,16 +7,20 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
   const [yearlyInterestRate, setYearlyInterestRate] = useState(null);
   const [yearsToInvest, setYearsToInvest] = useState(null);
   const [yearlyInterestFrequency, setYearlyInterestFrequency] = useState(null);
+  const [deposits, setDeposits] = useState(null);
+
 
   const setDataFromCalculatorInputForm = (
     initialDeposit,
     yearlyInterestRate,
     yearsToInvest,
+    deposits,
     yearlyInterestFrequency
   ) => {
     setInitialDeposit(Number(initialDeposit));
     setYearlyInterestRate(Number(yearlyInterestRate));
     setYearsToInvest(Number(yearsToInvest));
+    setDeposits(Number(deposits));
     setYearlyInterestFrequency(yearlyInterestFrequency);
   }
 
@@ -26,6 +30,7 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
         initialDeposit,
         yearlyInterestRate,
         yearsToInvest,
+        deposits,
         yearlyInterestFrequency,
         setDataFromCalculatorInputForm
       }}

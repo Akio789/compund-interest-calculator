@@ -19,6 +19,7 @@ const CalculatorInputForm = () => {
     yearlyInterestFrequencyFormInput,
     setYearlyInterestFrequencyFormInput
   ] = useState(yearlyInterestFrequency.Yearly);
+  const [depositsFormInput, setDepositsFormInput] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
   const onInitialDepositFormInputChange = ({ target: { value } }) => {
@@ -39,15 +40,25 @@ const CalculatorInputForm = () => {
     }
     setYearsToInvestFormInput(value);
   };
+  const onDepositsFormInputChange = ({ target: { value } }) => {
+    if (_.isNaN(Number(value))) {
+      return;
+    }
+    setDepositsFormInput(value);
+  };
   const onButtonClicked = () => {
-    if (initialDepositFormInput === '' || yearlyInterestRateFormInput === '' || yearsToInvestFormInput === '') {
+    const inputsToValidate = [
+      initialDepositFormInput,
+      yearlyInterestRateFormInput,
+      yearsToInvestFormInput,
+      depositsFormInput
+    ]
+    if (inputsToValidate.find((value) => value === '') !== undefined) {
       setErrorMessage('Some fields are missing');
       return;
     }
     setDataFromCalculatorInputForm(
-      initialDepositFormInput,
-      yearlyInterestRateFormInput,
-      yearsToInvestFormInput,
+      ...inputsToValidate,
       yearlyInterestFrequencyFormInput
     );
   };
@@ -103,7 +114,7 @@ const CalculatorInputForm = () => {
       />
       <TextField
         variant="standard"
-        label="Yearly To Invest"
+        label="Years To Invest"
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -130,6 +141,19 @@ const CalculatorInputForm = () => {
       >
         {yearlyInterestFrequencyMenuItems}
       </TextField>
+      <TextField
+        variant="standard"
+        label="Deposits"
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <AttachMoneyIcon />
+            </InputAdornment>
+          )
+        }}
+        value={depositsFormInput}
+        onChange={onDepositsFormInputChange}
+      />
       <Button
         variant="contained"
         onClick={onButtonClicked}
