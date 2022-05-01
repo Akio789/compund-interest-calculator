@@ -1,8 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { Alert, Button, FormControl, InputAdornment, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Alert, Button, InputAdornment, MenuItem, TextField } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PercentIcon from '@mui/icons-material/Percent';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import styles from './CalculatorInputForm.module.css';
 import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
 import _ from 'lodash'
@@ -113,17 +114,22 @@ const CalculatorInputForm = () => {
         value={yearsToInvestFormInput}
         onChange={onYearsToInvestFormInputChange}
       />
-      <FormControl variant="standard">
-        <InputLabel>
-          Yearly Interest Frequency
-        </InputLabel>
-        <Select
-          value={yearlyInterestFrequencyFormInput}
-          onChange={onSelectYearlyInterestFrequency}
-        >
-          {yearlyInterestFrequencyMenuItems}
-        </Select>
-      </FormControl>
+      <TextField
+        select
+        label="Yearly Interest Frequency"
+        variant="standard"
+        value={yearlyInterestFrequencyFormInput}
+        onChange={onSelectYearlyInterestFrequency}
+        InputProps={{
+          startAdornment: (
+            <InputAdornment position="start">
+              <ScheduleIcon />
+            </InputAdornment>
+          )
+        }}
+      >
+        {yearlyInterestFrequencyMenuItems}
+      </TextField>
       <Button
         variant="contained"
         onClick={onButtonClicked}
