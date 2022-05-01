@@ -7,7 +7,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import styles from './CalculatorInputForm.module.css';
 import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
 import _ from 'lodash'
-import { yearlyInterestFrequency } from '../constants';
+import { YEARLY_INTEREST_FREQUENCIES } from '../constants';
 
 const CalculatorInputForm = () => {
   const { setDataFromCalculatorInputForm } = useContext(CompoundInterestCalculatorContext);
@@ -18,7 +18,7 @@ const CalculatorInputForm = () => {
   const [
     yearlyInterestFrequencyFormInput,
     setYearlyInterestFrequencyFormInput
-  ] = useState(yearlyInterestFrequency.Yearly);
+  ] = useState(YEARLY_INTEREST_FREQUENCIES.Yearly);
   const [depositsFormInput, setDepositsFormInput] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -58,13 +58,16 @@ const CalculatorInputForm = () => {
       return;
     }
     setDataFromCalculatorInputForm(
-      ...inputsToValidate,
+      Number(initialDepositFormInput),
+      Number(yearlyInterestRateFormInput),
+      Number(yearsToInvestFormInput),
+      Number(depositsFormInput),
       yearlyInterestFrequencyFormInput
     );
   };
 
   const yearlyInterestFrequencyMenuItems = (
-    Object.entries(yearlyInterestFrequency).map(([key, val]) => {
+    Object.entries(YEARLY_INTEREST_FREQUENCIES).map(([key, val]) => {
       return <MenuItem value={val} key={key}>{key}</MenuItem>
     })
   );
@@ -83,7 +86,7 @@ const CalculatorInputForm = () => {
             severity="error"
             onClose={() => setErrorMessage('')}
           >
-            Some fields are missing
+            {errorMessage}
           </Alert>)
       }
       <TextField

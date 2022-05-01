@@ -1,4 +1,4 @@
-export const yearlyInterestFrequency = {
+export const YEARLY_INTEREST_FREQUENCIES = {
   Yearly: 'Yearly',
   Monthly: 'Monthly',
   Biweekly: 'Biweekly',
