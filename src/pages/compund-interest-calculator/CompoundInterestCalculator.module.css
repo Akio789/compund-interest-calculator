@@ -1,3 +1,19 @@
 .header {
     margin-bottom: 1rem;
 }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 5%;
+}
+
+.form {
+    flex: 1;
+    min-width: 20rem;
+}
+
+.results {
+    flex: 3;
+    min-width: 25rem;
+}

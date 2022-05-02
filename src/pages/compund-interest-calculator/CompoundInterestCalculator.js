@@ -1,16 +1,17 @@
 import React from 'react';
-import { Container } from '@mui/material';
 import Header from '../../components/header/Header';
 import CalculatorInputForm from './calculator-input-form/CalculatorInputForm';
 import styles from './CompoundInterestCalculator.module.css';
+import CalculationResults from './calculation-results/CalculationResults';
 
 const CompoundInterestCalculator = () => {
   return (
     <>
       <Header className={styles.header} />
-      <Container>
-        <CalculatorInputForm />
-      </Container>
+      <div className={styles.container}>
+        <CalculatorInputForm className={styles.form} />
+        <CalculationResults className={styles.results} />
+      </div>
     </>
   );
 }

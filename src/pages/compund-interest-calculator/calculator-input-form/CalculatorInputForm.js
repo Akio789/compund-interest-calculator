@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Alert, Button, InputAdornment, MenuItem, TextField } from '@mui/material';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import PercentIcon from '@mui/icons-material/Percent';
@@ -9,7 +10,7 @@ import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInte
 import _ from 'lodash'
 import { YEARLY_INTEREST_FREQUENCIES } from '../constants';
 
-const CalculatorInputForm = () => {
+const CalculatorInputForm = ({ className }) => {
   const { setDataFromCalculatorInputForm } = useContext(CompoundInterestCalculatorContext);
 
   const [initialDepositFormInput, setInitialDepositFormInput] = useState(0);
@@ -77,7 +78,7 @@ const CalculatorInputForm = () => {
   };
 
   return (
-    <div className={styles.form}>
+    <div className={`${styles.form} ${className}`}>
       <h3>Enter your data</h3>
       {
         errorMessage
@@ -166,5 +167,9 @@ const CalculatorInputForm = () => {
     </div>
   );
 }
+
+CalculatorInputForm.propTypes = {
+  className: PropTypes.string
+};
 
 export default CalculatorInputForm;
