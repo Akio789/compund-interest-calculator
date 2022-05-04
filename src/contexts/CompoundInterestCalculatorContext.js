@@ -1,4 +1,6 @@
 import React, { createContext, useState } from 'react';
+import _ from 'lodash';
+import { TIMES_INTEREST_APPLIED_PER_TIME_PERIOD } from '../pages/compund-interest-calculator/constants';
 
 const CompoundInterestCalculatorContext = createContext();
 
@@ -24,6 +26,23 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
     setYearlyInterestFrequency(yearlyInterestFrequency);
   }
 
+  const calculateResults = () => {
+    const labels = Array(yearsToInvest).fill().map((x, i) => i + 1)
+    const moneyByYear = labels.reduce((arr) => {
+      let moneyAtStartOfYear;
+      if (arr.length === 0) {
+        moneyAtStartOfYear = initialDeposit;
+      } else {
+        moneyAtStartOfYear = arr[arr.length - 1];
+      }
+      const yearlyDeposit = deposits * TIMES_INTEREST_APPLIED_PER_TIME_PERIOD[yearlyInterestFrequency]
+      const result = (moneyAtStartOfYear * (1 + (yearlyInterestRate / 100))) + yearlyDeposit;
+      arr.push(_.round(result, 2));
+      return arr;
+    }, []);
+    return { labels, moneyByYear };
+  }
+
   return (
     <CompoundInterestCalculatorContext.Provider
       value={{
@@ -32,7 +51,8 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
         yearsToInvest,
         deposits,
         yearlyInterestFrequency,
-        setDataFromCalculatorInputForm
+        setDataFromCalculatorInputForm,
+        calculateResults
       }}
     >
       {children}

@@ -6,7 +6,7 @@ import PercentIcon from '@mui/icons-material/Percent';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import styles from './CalculatorInputForm.module.css';
-import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
+import { CompoundInterestCalculatorContext } from '../../../contexts/CompoundInterestCalculatorContext';
 import _ from 'lodash'
 import { YEARLY_INTEREST_FREQUENCIES } from '../constants';
 

@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { CompoundInterestCalculatorContext } from '../../../contexts/CompundInterestCalculatorContext';
+import { render, screen } from '@testing-library/react';
+import { CompoundInterestCalculatorContext } from '../../../contexts/CompoundInterestCalculatorContext';
 import CalculatorInputForm from './CalculatorInputForm';
 import userEvent from '@testing-library/user-event'
 import { YEARLY_INTEREST_FREQUENCIES } from '../constants';

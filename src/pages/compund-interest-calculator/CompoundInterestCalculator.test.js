@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { CompoundInterestCalculatorContext } from '../../contexts/CompundInterestCalculatorContext';
+import { CompoundInterestCalculatorContext } from '../../contexts/CompoundInterestCalculatorContext';
 import CompoundInterestCalculator from './CompoundInterestCalculator';
 
 const defaultValues = {
