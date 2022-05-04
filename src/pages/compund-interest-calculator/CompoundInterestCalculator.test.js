@@ -8,7 +8,8 @@ const defaultValues = {
   yearsToInvest: 0,
   deposits: 0,
   yearlyInterestFrequency: 0,
-  setDataFromCalculatorInputForm: () => { }
+  setDataFromCalculatorInputForm: () => { },
+  calculateResults: () => ({})
 }
 
 const renderComponent = (values) => {

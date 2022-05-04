@@ -4,9 +4,12 @@ import CalculatorInputForm from './CalculatorInputForm';
 import userEvent from '@testing-library/user-event'
 import { YEARLY_INTEREST_FREQUENCIES } from '../constants';
 
-let setDataFromCalculatorInputForm = jest.fn();
+const setDataFromCalculatorInputForm = jest.fn();
 
-const defaultValues = { setDataFromCalculatorInputForm }
+const defaultValues = {
+  setDataFromCalculatorInputForm,
+  calculateResults: () => ({})
+}
 
 const renderComponent = (values) => {
   return render(
@@ -16,7 +19,7 @@ const renderComponent = (values) => {
   )
 }
 
-describe('Compund Interest Calculator', () => {
+describe('Calculator Input Form', () => {
   it('renders base form', () => {
     renderComponent();
     const title = screen.getByText('Enter your data');

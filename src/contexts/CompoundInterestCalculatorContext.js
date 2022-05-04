@@ -27,7 +27,7 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
   }
 
   const calculateResults = () => {
-    const labels = Array(yearsToInvest).fill().map((x, i) => i + 1)
+    const labels = Array(yearsToInvest).fill().map((x, i) => `Year ${i + 1}`)
     const moneyByYear = labels.reduce((arr) => {
       let moneyAtStartOfYear;
       if (arr.length === 0) {
