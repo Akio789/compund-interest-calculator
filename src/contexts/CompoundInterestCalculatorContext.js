@@ -50,7 +50,7 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
     const total = results.moneyByYear[results.moneyByYear.length - 1];
     const accumulatedInterests = total - initialDeposit - additionalDeposits;
     return {
-      'Initial Deposit': _.round(initialDeposit || 0, 2),
+      'Initial Deposits': _.round(initialDeposit || 0, 2),
       'Additional Deposits': _.round(additionalDeposits || 0, 2),
       'Accumulated Interests': _.round(accumulatedInterests || 0, 2),
       'Total': _.round(total || 0, 2)

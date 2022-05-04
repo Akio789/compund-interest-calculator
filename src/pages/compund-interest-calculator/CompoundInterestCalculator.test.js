@@ -9,7 +9,15 @@ const defaultValues = {
   deposits: 0,
   yearlyInterestFrequency: 0,
   setDataFromCalculatorInputForm: () => { },
-  calculateResults: () => ({})
+  calculateResults: () => ({}),
+  calculateResultsSummary: () => {
+    return {
+      'Initial Deposits': 0,
+      'Additional Deposits': 0,
+      'Accumulated Interests': 0,
+      'Total': 0
+    }
+  }
 }
 
 const renderComponent = (values) => {
@@ -25,7 +33,15 @@ describe('Compund Interest Calculator', () => {
     renderComponent();
     const headerTitle = screen.getByText('Compund Interest Calculator');
     const form = screen.getByText('Enter your data');
+    const initialDeposit = screen.getByText('Initial Deposits');
+    const additionalDeposits = screen.getByText('Additional Deposits');
+    const accumulatedInterests = screen.getByText('Accumulated Interests');
+    const total = screen.getByText('Total');
     expect(headerTitle).toBeInTheDocument();
     expect(form).toBeInTheDocument();
+    expect(initialDeposit).toBeInTheDocument();
+    expect(additionalDeposits).toBeInTheDocument();
+    expect(accumulatedInterests).toBeInTheDocument();
+    expect(total).toBeInTheDocument();
   });
 });

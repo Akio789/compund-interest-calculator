@@ -52,14 +52,14 @@ describe('Calculator Input Form', () => {
     expect(Number(initialDeposit.value)).toBe(1.1);
     expect(Number(yearlyInterestRate.value)).toBe(1.1);
     expect(Number(deposits.value)).toBe(1.1);
-  })
+  });
 
   it('inputs accept only int', () => {
     renderComponent();
     const yearsToInvest = screen.getByLabelText('Years To Invest');
     userEvent.type(yearsToInvest, 'aa1.1aa');
     expect(Number(yearsToInvest.value)).toBe(1);
-  })
+  });
 
   it('fires fn with right data on button clicked', () => {
     renderComponent();
@@ -80,5 +80,5 @@ describe('Calculator Input Form', () => {
     expect(setDataFromCalculatorInputForm).toHaveBeenCalledWith(
       1, 2, 3, 4, YEARLY_INTEREST_FREQUENCIES.Monthly
     );
-  })
+  });
 });
