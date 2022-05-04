@@ -43,6 +43,20 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
     return { labels, moneyByYear };
   }
 
+  const calculateResultsSummary = () => {
+    const yearlyDeposit = deposits * TIMES_INTEREST_APPLIED_PER_TIME_PERIOD[yearlyInterestFrequency]
+    const additionalDeposits = yearlyDeposit * yearsToInvest;
+    const results = calculateResults();
+    const total = results.moneyByYear[results.moneyByYear.length - 1];
+    const accumulatedInterests = total - initialDeposit - additionalDeposits;
+    return {
+      'Initial Deposit': _.round(initialDeposit || 0, 2),
+      'Additional Deposits': _.round(additionalDeposits || 0, 2),
+      'Accumulated Interests': _.round(accumulatedInterests || 0, 2),
+      'Total': _.round(total || 0, 2)
+    }
+  }
+
   return (
     <CompoundInterestCalculatorContext.Provider
       value={{
@@ -52,7 +66,8 @@ const CompoundInterestCalculatorContextProvider = ({ children }) => {
         deposits,
         yearlyInterestFrequency,
         setDataFromCalculatorInputForm,
-        calculateResults
+        calculateResults,
+        calculateResultsSummary
       }}
     >
       {children}
