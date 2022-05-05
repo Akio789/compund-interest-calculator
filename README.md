@@ -1,4 +1,13 @@
-# Getting Started with Create React App
+# Compound Interest Calculator
+Compound interest calculator for investors. Would you like to know how much money you will
+have in the future if you invest your money today? If so, this is the right tool for you.
+
+## Built with
+![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![Material UI](https://img.shields.io/badge/MUI-%230081CB.svg?style=for-the-badge&logo=mui&logoColor=white)
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
